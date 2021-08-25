@@ -1,4 +1,58 @@
+body {
+}
+
+header {
+    width: 100%;
+    background: linear-gradient(to right, #5b58dd, #2e124e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    padding: .5vw;
+    color: white;
+    font-weight: bolder;
+}
+
 .search-sidebar label, input, button {
     width: 100%;
     margin-bottom: 1.5vh;
+}
+
+#search-btn {
+    background-color: #6495ff;
+    color: white;
+}
+
+#search-btn:hover {
+    background-color: #2e124e;
+}
+
+#search-sidebar div {
+    border-bottom: 2px solid gray;
+}
+
+#austin {
+    margin-top: 1.5vh;
+}
+
+#search-sidebar label {
+    font-size: 3.5vh;
+    font-weight: bolder;
+}
+
+#search-sidebar input {
+    height: 5vh;
+}
+
+#main-window {
+    border: 1px solid black;
+    min-height: 30vh;
+    width: 100%;
+}
+
+#five-day h2 {
+    font-weight: bolder;
+    font-size: 3vh;
 }

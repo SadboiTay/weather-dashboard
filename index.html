@@ -10,15 +10,17 @@
 </head>
 <body>
     <header>
-        Weather Dashboard
+        <h1>Weather Dashboard</h1>
     </header>
     <main class="container">
         <div class="row">
-            <div id="search-sidebar" class="col-12 col-lg-3">
-                <label for="search">Search for a City:</label>
-                <input type="text" name="search" placeholder="Flagstaff">
-                <button class="btn btn-info" type="submit">Search</button>
-                <button class="btn btn-secondary" type="button">Austin</button>
+            <div id="search-sidebar" class="col-12 col-lg-3 mt-3">
+                <div>
+                    <label for="search">Search for a City:</label>
+                    <input type="text" name="search" placeholder="Flagstaff">
+                    <button id="search-btn" class="btn" type="submit">Search</button>
+                </div>
+                <button id="austin" class="btn btn-secondary" type="button">Austin</button>
                 <button class="btn btn-secondary" type="button">Chicago</button>
                 <button class="btn btn-secondary" type="button">New York</button>
                 <button class="btn btn-secondary" type="button">Orlando</button>
@@ -27,15 +29,15 @@
                 <button class="btn btn-secondary" type="button">Denver</button>
                 <button class="btn btn-secondary" type="button">Atlanta</button>
             </div>
-            <div class="col-12 col-lg-9 bg-secondary">
+            <div class="col-12 col-lg-9 ">
                 <div class="row">
-                    <div id="main-window" class="col-12 col-lg-3">
-    
+                    <div id="main-window" class="col-12 col-lg-9 mt-4">
+                        
                     </div>
                 </div>
                 <div class="row">
-                    <div id="5-day" class="col-12 col-lg-3">
-                        
+                    <div id="five-day" class="col-12 col-lg-9">
+                        <h2 class="pt-2">5-Day Forecast:</h2>
                     </div>
                 </div>
             </div>
