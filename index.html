@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header>
+        Weather Dashboard
+    </header>
+    <main class="container">
+        <div class="row">
+            <div id="search-sidebar" class="col-12 col-lg-3">
+                <label for="search">Search for a City:</label>
+                <input type="text" name="search" placeholder="Flagstaff">
+                <button class="btn btn-info" type="submit">Search</button>
+                <button class="btn btn-secondary" type="button">Austin</button>
+                <button class="btn btn-secondary" type="button">Chicago</button>
+                <button class="btn btn-secondary" type="button">New York</button>
+                <button class="btn btn-secondary" type="button">Orlando</button>
+                <button class="btn btn-secondary" type="button">San Francisco</button>
+                <button class="btn btn-secondary" type="button">Seattle</button>
+                <button class="btn btn-secondary" type="button">Denver</button>
+                <button class="btn btn-secondary" type="button">Atlanta</button>
+            </div>
+            <div class="col-12 col-lg-9 bg-secondary">
+                <div class="row">
+                    <div id="main-window" class="col-12 col-lg-3">
+    
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="5-day" class="col-12 col-lg-3">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
