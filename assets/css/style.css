@@ -3,7 +3,7 @@ body {
 
 header {
     width: 100%;
-    background: linear-gradient(to right, #5b58dd, #2e124e);
+    background: linear-gradient(to right, #3B6DC3, #230555);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,13 +20,21 @@ header h1 {
     margin-bottom: 1.5vh;
 }
 
-#search-btn {
-    background-color: #6495ff;
+#search-sidebar button {
+    background-color: #B7B7B7;
+}
+
+#search-sidebar button:hover {
+    background-color: #6e6e6e;
+}
+
+#search-sidebar div button {
+    background-color: #5AA2E9;
     color: white;
 }
 
-#search-btn:hover {
-    background-color: #2e124e;
+#search-sidebar div button:hover {
+    background-color: #2B2777;
 }
 
 #search-sidebar div {
@@ -48,11 +56,20 @@ header h1 {
 
 #main-window {
     border: 1px solid black;
-    min-height: 30vh;
+    min-height: 25vh;
     width: 100%;
 }
 
-#five-day h2 {
+h2 {
     font-weight: bolder;
     font-size: 3vh;
+}
+
+.five-days {
+    min-height: 24vh;
+    background-color: #33475A;
+}
+
+.five-days h4 {
+    color: white;
 }
