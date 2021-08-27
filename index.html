@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- my css -->
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
@@ -34,41 +36,46 @@
             <div class="col-12 col-lg-9 mt-4">
                 <div class="row">
                     <div id="main-window" class="col-12 col-lg-9">
-                        
+                        <h2 id="city">Atlanta</h2>
+                        <h2 id="current-date"></h2> <img id="current-icon" src="https://via.placeholder.com/40" class="mb-3">
+                        <p>Temp: <span id="current-temp"></span></p>
+                        <p>Wind: <span id="current-wind"></span></p>
+                        <p>Humidity: <span id="current-humidity"></span></p>
+                        <p>UV Index: <span id="current-uv"></span></p>
                     </div>
                 </div>
-                <h2 class="pt-2">5-Day Forecast:</h2>
+                <h3 class="pt-2">5-Day Forecast:</h3>
                 <div class="row justify-content-between">
                     <div id="day1" class="col-4 col-lg-2 five-days">
-                        <h4 id="date-1" class="my-2">3/31/2021</h4>
+                        <h4 id="date-1" class="my-2"></h4>
                         <img src="https://via.placeholder.com/40" class="mb-3">
                         <p class="text-light">Temp:<span id="temp-1"></span></p>
                         <p class="text-light">Wind:<span id="wind-1"></span></p>
                         <p class="text-light">Humidity:<span id="humidity-1"></span></p>
                     </div>
                     <div id="day2" class="col-4 col-lg-2 five-days">
-                        <h4 id="date-2" class="my-2">4/1/2021</h4>
+                        <h4 id="date-2" class="my-2"></h4>
                         <img src="https://via.placeholder.com/40" class="mb-3">
                         <p class="text-light">Temp:<span id="temp-2"></span></p>
                         <p class="text-light">Wind:<span id="wind-2"></span></p>
                         <p class="text-light">Humidity:<span id="humidity-2"></span></p>
                     </div>
                     <div id="day3" class="col-4 col-lg-2 five-days">
-                        <h4 id="date-3" class="my-2">4/2/2021</h4>
+                        <h4 id="date-3" class="my-2"></h4>
                         <img src="https://via.placeholder.com/40" class="mb-3">
                         <p class="text-light">Temp:<span id="temp-3"></span></p>
                         <p class="text-light">Wind:<span id="wind-3"></span></p>
                         <p class="text-light">Humidity:<span id="humidity-3"></span></p>
                     </div>
                     <div id="day4" class="col-4 col-lg-2 five-days">
-                        <h4 id="date-4" class="my-2">4/3/2021</h4>
+                        <h4 id="date-4" class="my-2"></h4>
                         <img src="https://via.placeholder.com/40" class="mb-3">
                         <p class="text-light">Temp:<span id="temp-4"></span></p>
                         <p class="text-light">Wind:<span id="wind-4"></span></p>
                         <p class="text-light">Humidity:<span id="humidity-4"></span></p>
                     </div>
                     <div id="day5" class="col-4 col-lg-2 five-days">
-                        <h4 id="date-5" class="my-2">4/4/2021</h4>
+                        <h4 id="date-5" class="my-2"></h4>
                         <img src="https://via.placeholder.com/40" class="mb-3">
                         <p class="text-light">Temp:<span id="temp-5"></span></p>
                         <p class="text-light">Wind:<span id="wind-5"></span></p>
@@ -79,7 +86,11 @@
         </div>
     </main>
 
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- my script -->
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

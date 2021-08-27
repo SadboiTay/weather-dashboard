@@ -6,18 +6,35 @@ var searchEntry = $("#input");
 // saved searches array
 var searchHistory = [];
 
-// function to fetch and parse api
-var fetcher = function(userSearch) {
-    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API-key}"
+// date display handler
+var dateDisplayHandler = function () {
+    // current day
+    var currentDay = moment().format("M/DD/YYYY");
+    $("#current-date").text("("+currentDay+")");
 
-    fetch(apiUrl).then(function(response) {
-        if (response.ok) {
-            response.json().then(function(response) {
-                console.log(response);
-            })
-        }
-    })
+    // tomorrow
+    var day1 = moment().add("day", 1).format("M/DD/YYYY");
+    $("#date-1").text(day1);
+    
+    // day after tomorrow
+    var day2 = moment().add("day", 2).format("M/DD/YYYY");
+    $("#date-2").text(day2);
+
+    // 3 days from now
+    var day3 = moment().add("day", 3).format("M/DD/YYYY");
+    $("#date-3").text(day3);
+
+    // 4 days from now
+    var day4 = moment().add("day", 4).format("M/DD/YYYY");
+    $("#date-4").text(day4);
+
+    // 5 days from now
+    var day5 = moment().add("day", 5).format("M/DD/YYYY");
+    $("#date-5").text(day5);
 }
+
+dateDisplayHandler();
+
 // search button 'enter' listener
 searchEntry.keypress(function(event) {
     if (event.which == 13) {
@@ -28,11 +45,94 @@ searchEntry.keypress(function(event) {
 
 // search button click listener
 searchBtnEl.click(function() {
+    // grab value
     var searchEntry = $("#input").val().trim();
+
     console.log(searchEntry + " was searched.");
+
+    // send city to displayHandler
+    displayHandler(searchEntry);
+
+    // send to geocoding function
+    geocode(searchEntry);
+
+    // save to local data for history
     saveSearch(searchEntry);
     $("#input").val("");
 })
+
+// geocode users search to get lat/lon for api call
+var geocode = function(cityName) {
+    // set url
+    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=cccf269a77ddb6c94abd87b983498833";
+
+    // fetch geocode info
+    fetch(apiUrl).then(function(repsonse) {
+        if (repsonse.ok) {
+            repsonse.json().then(function(response) {
+                // grab city name and send to displayhandler
+                var cityName = response[0].name;
+                displayHandler(cityName);
+
+                // grab lat/lon and send to fetcher
+                var lat = response[0].lat
+                var lon = response[0].lon
+                fetcher(lat, lon);
+            })
+        }
+    })
+} 
+
+// function to fetch and parse api
+var fetcher = function(lat, lon,) {
+    // set url
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=cccf269a77ddb6c94abd87b983498833"
+
+    fetch(apiUrl).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(response) {
+                console.log(response);
+
+                // grab weather icon
+                var weatherId = response.daily[0].weather[0].icon;
+                var iconUrl = "http://openweathermap.org/img/wn/"+weatherId+"@2x.png"
+                $("#current-icon").attr("src", iconUrl);
+
+                // grab temp
+                var temp = response.current.temp;
+                $("#current-temp").text(temp);
+                
+                // grab wind
+                var wind = response.current.wind_speed + " MPH";
+                $("#current-wind").text(wind);
+                
+                // grab humidity
+                var humidity = response.current.humidity + "%";
+                $("#current-humidity").text(humidity);
+
+                // grab uvi
+                var uvi = response.current.uvi;
+                $("#current-uv").text(uvi);
+                // set uvi color
+                if (uvi >= 0 && uvi <= 2) {
+                    $("#current-uv").removeClass()
+                    $("#current-uv").addClass("uv-favorable")
+                } else if (uvi >= 3 && uvi <= 7) {
+                    $("#current-uv").removeClass()
+                    $("#current-uv").addClass("uv-moderate")
+                } else {
+                    $("#current-uv").removeClass()
+                    $("#current-uv").addClass("uv-severe")
+                }
+            })
+        }
+    })
+}
+
+var displayHandler = function(cityName, temp, wind, humidity, uvi, iconUrl) {
+    // display main window
+    $("#city").text(cityName);
+}
 
 // save search to localstorage
 var saveSearch = function(entry) {
@@ -41,5 +141,3 @@ var saveSearch = function(entry) {
 
     localStorage.setItem("searchHistory", searchHistory);
 }
-
-// fetcher();
