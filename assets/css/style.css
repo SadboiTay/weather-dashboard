@@ -79,18 +79,21 @@ h3 {
 
 .uv-favorable {
     background-color: green;
+    border-radius: 5px;
     padding: 1px 8px;
     color: white;
 }
 
 .uv-moderate {
     background-color: orange;
+    border-radius: 5px;
     padding: 1px 8px;
     color: white;
 }
 
 .uv-severe {
     background-color: purple;
+    border-radius: 5px;
     padding: 1px 8px;
     color: white;
 }
