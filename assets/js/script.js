@@ -83,7 +83,7 @@ var geocode = function(cityName) {
                 var lat = response[0].lat
                 var lon = response[0].lon
                 fetcher(lat, lon);
-                
+
                 // load history and update with new button
                 loadHistory();
             })
@@ -176,13 +176,16 @@ var loadHistory = function() {
     // clear old buttons
     $("#search-history-container").html("");
 
+    // create unique array to clear duplicate entries
+    const uniqueSearchHistory = [...new Set(searchHistory)];
+
     // loop through and create buttons
-    for (var i = searchHistory.length-1; i >= searchHistory.length-7; i--) {
+    for (var i = uniqueSearchHistory.length-1; i >= uniqueSearchHistory.length-7; i--) {
 
         // check for undefined/empty slots
-        if (searchHistory[i]) {
+        if (uniqueSearchHistory[i]) {
             // create new buttons
-            var cityName = searchHistory[i];
+            var cityName = uniqueSearchHistory[i];
             $("<button class='btn' type='button'>"+cityName+"</button>").appendTo("#search-history-container");
         }
     }
