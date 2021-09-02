@@ -53,6 +53,14 @@ searchBtnEl.click(function() {
     $("#input").val("");
 })
 
+// search history button click listener
+$("#search-history-container").on("click", "button", function(event) {
+    var cityName = event.target.innerText;
+
+    // send to geocoding function
+    geocode(cityName);
+})
+
 // geocode users search to get lat/lon for api call
 var geocode = function(cityName) {
     // set url
@@ -75,7 +83,7 @@ var geocode = function(cityName) {
                 var lat = response[0].lat
                 var lon = response[0].lon
                 fetcher(lat, lon);
-
+                
                 // load history and update with new button
                 loadHistory();
             })
