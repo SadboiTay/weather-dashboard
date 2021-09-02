@@ -165,16 +165,18 @@ var loadHistory = function() {
         searchHistory = [];
     }
 
-    console.log(searchHistory);
-
     // clear old buttons
     $("#search-history-container").html("");
 
     // loop through and create buttons
     for (var i = searchHistory.length-1; i >= searchHistory.length-7; i--) {
-        // create new buttons
-        var cityName = searchHistory[i];
-        $("<button class='btn' type='button'>"+cityName+"</button>").appendTo("#search-history-container");
+
+        // check for undefined/empty slots
+        if (searchHistory[i]) {
+            // create new buttons
+            var cityName = searchHistory[i];
+            $("<button class='btn' type='button'>"+cityName+"</button>").appendTo("#search-history-container");
+        }
     }
 }
 
