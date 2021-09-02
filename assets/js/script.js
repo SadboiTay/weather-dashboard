@@ -1,6 +1,5 @@
 // dom elements
 var searchBtnEl = $("#search-btn");
-var searchHistoryCntrEl = $("#search-history-container");
 var searchEntry = $("#input");
 
 // saved searches array
@@ -33,8 +32,6 @@ var dateDisplayHandler = function () {
     $("#date-5").text(day5);
 }
 
-dateDisplayHandler();
-
 // search button 'enter' listener
 searchEntry.keypress(function(event) {
     if (event.which == 13) {
@@ -47,14 +44,12 @@ searchEntry.keypress(function(event) {
 searchBtnEl.click(function() {
     // grab value
     var searchEntry = $("#input").val().trim();
-
+    
     console.log(searchEntry + " was searched.");
-
+    
     // send to geocoding function
     geocode(searchEntry);
-
-    // save to local data for history
-    saveSearch(searchEntry);
+    
     $("#input").val("");
 })
 
@@ -62,20 +57,27 @@ searchBtnEl.click(function() {
 var geocode = function(cityName) {
     // set url
     var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=cccf269a77ddb6c94abd87b983498833";
-
+    
     // fetch geocode info
     fetch(apiUrl).then(function(repsonse) {
         if (repsonse.ok) {
             repsonse.json().then(function(response) {
                 console.log(response);
-                // grab city name and send to displayhandler
+                
+                // grab city name and display
                 var cityName = response[0].name;
-                displayHandler(cityName);
-
+                $("#city").text(cityName);
+                
+                // save to local data for history
+                saveSearch(cityName);
+                
                 // grab lat/lon and send to fetcher
                 var lat = response[0].lat
                 var lon = response[0].lon
                 fetcher(lat, lon);
+
+                // load history and update with new button
+                loadHistory();
             })
         }
     })
@@ -85,17 +87,17 @@ var geocode = function(cityName) {
 var fetcher = function(lat, lon) {
     // set url
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=cccf269a77ddb6c94abd87b983498833"
-
+    
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(response) {
                 console.log(response);
-
+                
                 // grab weather icon
                 var weatherIcon = response.current.weather[0].icon;
                 var iconUrl = "http://openweathermap.org/img/wn/"+weatherIcon+"@2x.png"
                 $("#current-icon").attr("src", iconUrl);
-
+                
                 // grab temp
                 var temp = response.current.temp + " °F";
                 $("#current-temp").text(temp);
@@ -107,7 +109,7 @@ var fetcher = function(lat, lon) {
                 // grab humidity
                 var humidity = response.current.humidity + "%";
                 $("#current-humidity").text(humidity);
-
+                
                 // grab uvi
                 var uvi = response.current.uvi;
                 $("#current-uv").text(uvi);
@@ -122,14 +124,14 @@ var fetcher = function(lat, lon) {
                     $("#current-uv").removeClass()
                     $("#current-uv").addClass("uv-severe")
                 }
-
+                
                 // loop through daily key and grab/display data
                 for (var i = 0; i < 5; i++) {
                     // weather icon
                     var weatherIcon = response.daily[i].weather[0].icon;
                     var iconUrl = "http://openweathermap.org/img/wn/"+weatherIcon+"@2x.png"
                     $("#icon-" + (i + 1)).attr("src", iconUrl);
-
+                    
                     // temp
                     var temp = response.daily[i].temp.max + " °F";
                     $("#temp-" + (i + 1)).text(temp);
@@ -137,8 +139,8 @@ var fetcher = function(lat, lon) {
                     // wind
                     var wind = response.daily[i].wind_speed + " MPH";
                     $("#wind-" + (i + 1)).text(wind);
-
-                     // grab humidity
+                    
+                    // grab humidity
                     var humidity = response.daily[i].humidity + "%";
                     $("#humidity-" + (i + 1)).text(humidity);
                 }
@@ -147,15 +149,37 @@ var fetcher = function(lat, lon) {
     })
 }
 
-var displayHandler = function(cityName, temp, wind, humidity, uvi, iconUrl) {
-    // display main window
-    $("#city").text(cityName);
-}
-
 // save search to localstorage
-var saveSearch = function(entry) {
+var saveSearch = function(cityName) {
     // push to array
-    searchHistory.push(entry);
-
-    localStorage.setItem("searchHistory", searchHistory);
+    searchHistory.push(cityName);
+    
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 }
+
+var loadHistory = function() {
+    // grab from local storage
+    searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+
+    if (!searchHistory) {
+        searchHistory = [];
+    }
+
+    console.log(searchHistory);
+
+    // clear old buttons
+    $("#search-history-container").html("");
+
+    // loop through and create buttons
+    for (var i = searchHistory.length-1; i >= searchHistory.length-7; i--) {
+        // create new buttons
+        var cityName = searchHistory[i];
+        $("<button class='btn' type='button'>"+cityName+"</button>").appendTo("#search-history-container");
+    }
+}
+
+setInterval(dateDisplayHandler, 3600000);
+
+dateDisplayHandler();
+
+loadHistory();
