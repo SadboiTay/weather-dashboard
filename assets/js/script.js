@@ -64,7 +64,7 @@ $("#search-history-container").on("click", "button", function(event) {
 // geocode users search to get lat/lon for api call
 var geocode = function(cityName) {
     // set url
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=cccf269a77ddb6c94abd87b983498833";
+    var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=cccf269a77ddb6c94abd87b983498833";
     
     // fetch geocode info
     fetch(apiUrl).then(function(repsonse) {
