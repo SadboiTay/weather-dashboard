@@ -179,7 +179,7 @@ var loadHistory = function() {
     // create unique array to clear duplicate entries
     const uniqueSearchHistory = [...new Set(searchHistory)];
 
-    // loop through and create buttons
+    // loop through and create buttons from the last 7 searched cities
     for (var i = uniqueSearchHistory.length-1; i >= uniqueSearchHistory.length-7; i--) {
 
         // check for undefined/empty slots
